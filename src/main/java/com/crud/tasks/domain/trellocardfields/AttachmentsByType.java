@@ -1,6 +1,5 @@
 package com.crud.tasks.domain.trellocardfields;
 
-import com.crud.tasks.domain.Trello;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
