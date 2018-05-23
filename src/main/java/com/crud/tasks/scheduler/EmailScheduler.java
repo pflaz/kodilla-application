@@ -41,7 +41,5 @@ public class EmailScheduler {
                 SUBJECT,
                 getMessageToSend(size)
         ));
-
-
     }
 }
