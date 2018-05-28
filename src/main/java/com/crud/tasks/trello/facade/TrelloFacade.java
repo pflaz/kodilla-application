@@ -5,7 +5,6 @@ import com.crud.tasks.domain.TrelloCard;
 import com.crud.tasks.dto.CreatedTrelloCardDto;
 import com.crud.tasks.dto.TrelloBoardDto;
 import com.crud.tasks.dto.TrelloCardDto;
-import com.crud.tasks.dto.trellocardfields.Trello;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.validator.TrelloValidator;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class TrelloFacade {
