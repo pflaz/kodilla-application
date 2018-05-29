@@ -37,16 +37,16 @@ public class TaskMapperTestSuite {
         TaskDto retrievedTaskDto = taskMapper.mapToTaskDto(retrievedTask);
         long retrievedTaskId = retrievedTaskDto.getId();
 
-
         // Then
+        try {
         assertEquals(taskId, retrievedTaskId);
         assertEquals("task title", retrievedTaskDto.getTitle());
         assertEquals("task content", retrievedTaskDto.getContent());
         assertEquals(1, retrievedTaskList.size());
-
-        // Clean up
-        dbService.deleteTask(taskId);
-
+        } finally {
+            // Clean up
+            dbService.deleteTask(taskId);
+        }
     }
 
 }
