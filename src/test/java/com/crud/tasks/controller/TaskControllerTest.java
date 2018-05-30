@@ -3,7 +3,6 @@ package com.crud.tasks.controller;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.dto.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
-import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
 import org.junit.Test;
@@ -17,11 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,6 +49,7 @@ public class TaskControllerTest {
         taskDtos.add(new TaskDto(1L, "task 1 title", "task 1 content"));
         taskDtos.add(new TaskDto(2L, "task 2 title", "task 2 content"));
 
+        when(service.getAllTasks()).thenReturn(new ArrayList<>());
         when(taskMapper.mapToTaskDtoList(any())).thenReturn(taskDtos);
 
         // When & Then
@@ -67,6 +68,8 @@ public class TaskControllerTest {
     public void shouldFetchTask() throws Exception {
         // Given
         TaskDto taskDto = new TaskDto(1L, "task title", "task content");
+
+        when(service.getTask(anyLong())).thenReturn(Optional.of(new Task()));
         when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
 
         // When & Then
@@ -83,8 +86,9 @@ public class TaskControllerTest {
     public void shouldUpdateTask() throws Exception {
         // Given
         TaskDto taskDto = new TaskDto(1L, "test title", "test content");
-
+        when(service.saveTask(any(Task.class))).thenReturn(new Task());
         when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
+        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(new Task());
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
@@ -106,6 +110,9 @@ public class TaskControllerTest {
         TaskDto taskDtoToSend = new TaskDto("test title", "test content");
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDtoToSend);
+
+        when(service.saveTask(any(Task.class))).thenReturn(new Task());
+        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(new Task());
 
         // When & Then
         mockMvc.perform(post("/v1/task/createTask")
