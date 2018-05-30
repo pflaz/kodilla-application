@@ -7,6 +7,7 @@ import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -125,6 +126,8 @@ public class TaskControllerTest {
     @Test
     public void shouldDeleteTask() throws Exception {
         // Given
+
+        Mockito.doNothing().when(service).deleteTask(anyLong());
 
         // When & Then
         mockMvc.perform(delete("/v1/task/deleteTask")
