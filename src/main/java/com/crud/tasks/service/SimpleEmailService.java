@@ -42,6 +42,8 @@ public class SimpleEmailService {
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             switch (mail.getEmailTemplate()) {
+                case TEXT_ONLY:
+                    messageHelper.setText(mail.getMessage());
                 case NEW_CARD_CREATED:
                     messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
                     break;
