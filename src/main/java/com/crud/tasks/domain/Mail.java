@@ -10,10 +10,12 @@ public class Mail {
     private String toCc;
     private String subject;
     private String message;
+    private EmailTemplate emailTemplate;
 
-    public Mail(String mailTo, String subject, String message) {
+    public Mail(String mailTo, String subject, String message, EmailTemplate emailTemplate) {
         this.mailTo = mailTo;
         this.subject = subject;
         this.message = message;
+        this.emailTemplate = emailTemplate;
     }
 }

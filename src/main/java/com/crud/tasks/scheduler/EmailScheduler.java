@@ -1,6 +1,7 @@
 package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
+import com.crud.tasks.domain.EmailTemplate;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
@@ -39,7 +40,8 @@ public class EmailScheduler {
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
-                getMessageToSend(size)
+                getMessageToSend(size),
+                EmailTemplate.CARDS_QUANTITY_NOTIFIER
         ));
     }
 }
